@@ -50,15 +50,44 @@ tw-link {
 
 tw-link:hover {
   color: #ffffff;
-  border-bottom-color: rgba(255,255,255,0.8);
+  border-bottom-color: rgba(255,255,255,0.85);
+  text-shadow: 0 0 12px rgba(255,255,255,0.25);
 }
 
 .scene-card {
-  background: rgba(0,0,0,0.42);
-  backdrop-filter: blur(2px);
-  padding: 1.5rem;
-  border-radius: 22px;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+  background: linear-gradient(rgba(0,0,0,0.34), rgba(0,0,0,0.52));
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 1.7rem;
+  border-radius: 24px;
+  box-shadow: 0 14px 45px rgba(0,0,0,0.42);
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.scene-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 42%),
+    linear-gradient(to bottom, rgba(255,255,255,0.03), transparent 35%);
+  pointer-events: none;
+}
+.scene-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.018) 0px,
+    rgba(255,255,255,0.018) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.22;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
 }
 
 .center-image {
@@ -67,9 +96,10 @@ tw-link:hover {
 }
 
 .center-image img {
-   width: min(100%, 420px);
+  width: min(100%, 420px);
   border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  box-shadow: 0 12px 34px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
 .viewfinder {
@@ -79,11 +109,19 @@ tw-link:hover {
   z-index: 999;
 }
 
+.viewfinder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 58%, rgba(0,0,0,0.22) 100%);
+}
+
 .viewfinder .corner {
   position: absolute;
   width: 52px;
   height: 52px;
   border: 3px solid rgba(255,255,255,0.72);
+  box-shadow: 0 0 10px rgba(255,255,255,0.12);
 }
 
 .viewfinder .tl {
@@ -99,9 +137,10 @@ tw-link:hover {
   border-left: none;
   border-bottom: none;
 }
+
 .viewfinder .bl {
   bottom: 18px;
-  left: 18px;
+   left: 18px;
   border-right: none;
   border-top: none;
 }
@@ -113,6 +152,11 @@ tw-link:hover {
   border-top: none;
 }
 
+@keyframes focusPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.68; }
+  50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+}
+
 .viewfinder .focus-box {
   position: absolute;
   top: 50%;
@@ -121,6 +165,8 @@ tw-link:hover {
   height: 128px;
   transform: translate(-50%, -50%);
   border: 2px solid rgba(255,255,255,0.58);
+  box-shadow: 0 0 14px rgba(255,255,255,0.12);
+  animation: focusPulse 2.2s ease-in-out infinite;
 }
 
 .camera-hud {
@@ -130,8 +176,9 @@ tw-link:hover {
   z-index: 1000;
   font-size: 0.78rem;
   letter-spacing: 0.08em;
-  opacity: 0.8;
+  opacity: 0.84;
   pointer-events: none;
+  text-shadow: 0 0 10px rgba(0,0,0,0.55);
 }
 
 .flash-overlay {
@@ -148,51 +195,58 @@ tw-link:hover {
   font-style: italic;
 }
 
+.cinematic-cut {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.82rem;
+  opacity: 0.75;
+}
+
 .bg-clemson {
   background-image:
-    linear-gradient(rgba(0,0,0,0.26), rgba(0,0,0,0.38)),
+    linear-gradient(rgba(255,130,70,0.18), rgba(0,0,0,0.46)),
     url("clemson_campus.png");
 }
 
-.bg-penguin {
+.bg-peacock {
   background-image:
-    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.45)),
-    url("penguin.jpg");
+    linear-gradient(rgba(118,30,132,0.24), rgba(0,0,0,0.52)),
+    url("peacock.jpg");
 }
 
 .bg-lake {
   background-image:
-    linear-gradient(rgba(0,0,0,0.28), rgba(0,0,0,0.42)),
+    linear-gradient(rgba(28,88,128,0.22), rgba(0,0,0,0.5)),
     url("IMG_7481.jpg");
 }
 
 .bg-camera {
   background-image:
-    linear-gradient(rgba(0,0,0,0.32), rgba(0,0,0,0.48)),
+    linear-gradient(rgba(60,45,90,0.18), rgba(0,0,0,0.52)),
     url("becky_camera.jpg");
 }
 
 .bg-alaska {
   background-image:
-    linear-gradient(rgba(12,28,52,0.28), rgba(12,28,52,0.52)),
+    linear-gradient(rgba(28,60,118,0.26), rgba(0,0,0,0.6)),
     url("alaska.jpg");
 }
 
 .bg-penguin-beach {
   background-image:
-    linear-gradient(rgba(10,28,44,0.22), rgba(10,28,44,0.45)),
+    linear-gradient(rgba(140,170,210,0.16), rgba(0,0,0,0.48)),
     url("penguin_beach.jpg");
 }
 
 .bg-penguin-surf {
   background-image:
-    linear-gradient(rgba(8,24,44,0.18), rgba(8,24,44,0.36)),
-    url("penguin_surf.jpg");
+    linear-gradient(rgba(62,122,182,0.18), rgba(0,0,0,0.44)),
+    url("penguin_surf.webp");
 }
 
 .bg-fog-ocean {
   background-image:
-    linear-gradient(rgba(18,24,38,0.24), rgba(18,24,38,0.52)),
+    linear-gradient(rgba(88,110,132,0.18), rgba(0,0,0,0.56)),
     url("fog_ocean.jpg");
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.flash = function(duration = 420) {
   const old = document.querySelector('.flash-overlay-live');
@@ -250,6 +304,10 @@ tw-link:hover {
 &lt;/div&gt;
 &lt;div class=&quot;camera-hud&quot;&gt;REC • ISO 400 • 1/250 • f/2.8&lt;/div&gt;
 &lt;div class=&quot;scene-card bg-clemson&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;cardinal.jpg&quot;&gt;
+  &lt;/div&gt;
+
   You are a cardinal.
 
   Small.
@@ -304,11 +362,12 @@ tw-link:hover {
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="Level 2" tags="" position="525,275" size="100,100">&lt;div class=&quot;scene-card bg-peacock&quot;&gt;
   &lt;div class=&quot;center-image&quot;&gt;
     &lt;img src=&quot;peacock.jpg&quot;&gt;
+}
   &lt;/div&gt;
 
   You have changed into a peacock.
 
-  The world no longer feels small and local.
+  The world no longer feels small.
 
   You feel larger.
 
@@ -316,11 +375,17 @@ tw-link:hover {
 
   Built to be noticed.
 
-  Your feathers carry attention with them.
+  Your feathers catch the light in ways the cardinal never could.
 
   This is the stage of beauty.
 
-  This is the stage where Becky begins to understand that photographing you changes you.
+  The stage of attention.
+
+  Becky sees you differently now.
+
+  Not just a bird.
+
+  Something worth chasing.
 
   [[Step into the open-&gt;Bird 2 Scene]]
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="Bird 2 Scene" tags="" position="725,250" size="100,100">&lt;div class=&quot;viewfinder&quot;&gt;
@@ -814,32 +879,34 @@ tw-link:hover {
 
   [[Stay-&gt;FinalChoice]]
   [[Run-&gt;FinalChoice]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="27" name="FinalChoice" tags="" position="475,1225" size="100,100">&lt;div class=&quot;scene-card bg-fog-ocean&quot;&gt;
-  Time narrows to one final moment.
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="27" name="FinalChoice" tags="" position="475,1225" size="100,100">&lt;div class=&quot;scene-card bg-penguin-surf&quot;&gt;
 
-  Becky lifts the camera.
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;penguin_surf.webp&quot;&gt;
+  &lt;/div&gt;
 
-  Her finger finds the shutter.
+  &lt;p class=&quot;fade-in&quot;&gt;A wave rises.&lt;/p&gt;
 
-  Then she stops.
+  &lt;p class=&quot;fade-in&quot;&gt;One penguin dives in.&lt;/p&gt;
 
-  No sound.
+  &lt;p class=&quot;fade-in&quot;&gt;Then another.&lt;/p&gt;
 
-  No flash.
+  &lt;p class=&quot;fade-in&quot;&gt;You follow.&lt;/p&gt;
 
-  No forced ending.
+  &lt;p class=&quot;fade-in&quot;&gt;You are no longer being watched into existence.&lt;/p&gt;
 
-  She finally understands that seeing you is not the same as owning you.
+  &lt;p class=&quot;fade-in&quot;&gt;You are moving by your own choice.&lt;/p&gt;
 
-  You turn and leave.
+  &lt;p class=&quot;fade-in&quot;&gt;The water lifts you.&lt;/p&gt;
 
-  Not running.
+  &lt;p class=&quot;fade-in&quot;&gt;The sky opens.&lt;/p&gt;
 
-  Not hiding.
+  &lt;p class=&quot;fade-in&quot;&gt;You are not a subject anymore.&lt;/p&gt;
 
-  Simply choosing yourself.
+  &lt;p class=&quot;fade-in&quot;&gt;You are your own story.&lt;/p&gt;
 
-  THE END.
+  &lt;p class=&quot;fade-in&quot;&gt;&lt;strong&gt;THE END.&lt;/strong&gt;&lt;/p&gt;
+
 &lt;/div&gt;</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
