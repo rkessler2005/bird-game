@@ -9,697 +9,853 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Bird game!!!.</tw-noscript></noscript></tw-story>
-<tw-storydata name="Bird game!!!" startnode="1" creator="Twine" creator-version="2.12.0" format="Harlowe" format-version="3.3.9" ifid="6450681C-CB35-4037-BDCB-B76E0F2E8393" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-story {
-  background: linear-gradient(to bottom, #eaf6ff, #ffffff);
-  color: #2f4f6f;
+<tw-storydata name="Bird game!!!" startnode="1" creator="Twine" creator-version="2.12.0" format="Harlowe" format-version="3.3.9" ifid="6450681C-CB35-4037-BDCB-B76E0F2E8393" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">html, body {
+  margin: 0;
+  height: 100%;
+}
+
+tw-story {
   font-family: Georgia, serif;
-  font-size: 1.25em;
-  padding: 3em;
-  transition: background 1s ease;
+  font-size: 1.15em;
+  line-height: 1.65;
+  color: white;
+  background: #000;
+  padding: 0;
 }
 
-/* Links */
-tw-link {
-  color: #5c8ecf;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-tw-link:hover {
-  color: #89b6f2;
-  transform: scale(1.05);
-}
-
-/* Soft dreamy text */
-tw-passagedata {
-  animation: fadeIn 1.5s ease;
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}tw-story {
-  background-image: url("cardinal.jpg");
+tw-passage {
+  min-height: 100vh;
+  padding: 3.5rem 2rem 2.5rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: rgba(0,0,0,0.4);
-  background-blend-mode: darken;
-  color: white;
+   background-attachment: fixed;
 }
 
-tw-passage {
-  font-size: 1.2em;
-  line-height: 1.6;
-  }</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.flash = function() {
-  let flash = document.createElement("div");
-  flash.style.position = "fixed";
-  flash.style.top = 0;
-  flash.style.left = 0;
-  flash.style.width = "100%";
-  flash.style.height = "100%";
-  flash.style.background = "white";
-  flash.style.opacity = "0.9";
-  flash.style.zIndex = 9999;
-  flash.style.transition = "opacity 0.5s ease";
+@media (min-width: 900px) {
+  tw-passage {
+    padding: 4.5rem 4rem 3rem 4rem;
+  }
+}
 
+tw-link {
+  color: #d9ecff;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.35);
+  transition: all 0.25s ease;
+}
+
+tw-link:hover {
+  color: #ffffff;
+  border-bottom-color: rgba(255,255,255,0.8);
+}
+
+.scene-card {
+  background: rgba(0,0,0,0.42);
+  backdrop-filter: blur(2px);
+  padding: 1.5rem;
+  border-radius: 22px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+}
+
+.center-image {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.center-image img {
+  width: min(100%, 420px);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+
+.viewfinder {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.viewfinder .corner {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border: 3px solid rgba(255,255,255,0.72);
+}
+.viewfinder .tl {
+  top: 18px;
+  left: 18px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.viewfinder .tr {
+  top: 18px;
+  right: 18px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.viewfinder .bl {
+  bottom: 18px;
+  left: 18px;
+  border-right: none;
+  border-top: none;
+}
+
+.viewfinder .br {
+  bottom: 18px;
+  right: 18px;
+  border-left: none;
+  border-top: none;
+}
+
+.viewfinder .focus-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 128px;
+  height: 128px;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(255,255,255,0.58);
+}
+
+.camera-hud {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  z-index: 1000;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.flash-overlay {
+  position: fixed;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2000;
+}
+
+.fade-note {
+  opacity: 0.9;
+  font-style: italic;
+}
+
+.bg-clemson {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.26), rgba(0,0,0,0.38)),
+    url("clemson_campus.png");
+}
+
+.bg-peacock {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.45)),
+    url("peacock.jpg");
+}
+
+.bg-lake {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.28), rgba(0,0,0,0.42)),
+    url("lakebird.jpg");
+}
+
+.bg-camera {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.32), rgba(0,0,0,0.48)),
+    url("becky_camera.jpg");
+}
+
+.bg-alaska {
+  background-image:
+    linear-gradient(rgba(12,28,52,0.28), rgba(12,28,52,0.52)),
+    url("alaska.jpg");
+}
+
+.bg-penguin-beach {
+  background-image:
+    linear-gradient(rgba(10,28,44,0.22), rgba(10,28,44,0.45)),
+    url("penguin_beach.jpg");
+}
+
+.bg-penguin-surf {
+  background-image:
+    linear-gradient(rgba(8,24,44,0.18), rgba(8,24,44,0.36)),
+    url("penguin_surf.jpg");
+}
+
+.bg-fog-ocean {
+  background-image:
+     linear-gradient(rgba(18,24,38,0.24), rgba(18,24,38,0.52)),
+    url("fog_ocean.jpg");
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.flash = function(duration = 420) {
+  const old = document.querySelector('.flash-overlay-live');
+  if (old) old.remove();
+
+  const flash = document.createElement('div');
+  flash.className = 'flash-overlay flash-overlay-live';
+  flash.style.opacity = '0.92';
+  flash.style.transition = 'opacity 0.45s ease';
   document.body.appendChild(flash);
 
   setTimeout(() => {
-    flash.style.opacity = "0";
-  }, 100);
+    flash.style.opacity = '0';
+  }, 70);
 
   setTimeout(() => {
     flash.remove();
-  }, 600);
-}</script><tw-passagedata pid="1" name="Start" tags="" position="375,125" size="100,100">&lt;style&gt;
-tw-passage {
-  background-image: url(&quot;clemson_campus.png&quot;);
-  background-size: cover;
-  background-position: center;
-  color: white;
-}
-&lt;/style&gt;
-You’re standing in Clemson.
-
-The air is quiet. Too quiet.
-
-You didn’t come here for anything special… just practice.
-
-Just photos.
-
-Then you see it.
-
-A cardinal.
-
-Still. Watching you.
-
-[[Raise the camera-&gt;Cardinal Scene]]</tw-passagedata><tw-passagedata pid="2" name="Cardinal Scene" tags="" position="350,275" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
-  &lt;img src=&quot;clemson_campus.png&quot; width=&quot;400&quot; style=&quot;border-radius:20px;&quot;&gt;
+  }, duration);
+};</script><tw-passagedata pid="1" name="Start" tags="" position="375,125" size="100,100">&lt;div class=&quot;viewfinder&quot;&gt;
+  &lt;div class=&quot;corner tl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner tr&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner bl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner br&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;focus-box&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;div class=&quot;camera-hud&quot;&gt;REC • ISO 400 • 1/200 • f/2.8&lt;/div&gt;
+&lt;div class=&quot;scene-card bg-clemson&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;clemson_campus.png&quot;&gt;
+  &lt;/div&gt;
 
-You’re standing in Clemson.
+  You’re standing in Clemson.
 
-The air is quiet. Too quiet.
+  The air is quiet. Too quiet.
 
-You didn’t come here for anything special… just practice.
+  You didn’t come here for anything special. Just practice.
 
-Just photos.
+  Just photos.
 
-Then you see it.
+  Then you see it.
 
-A cardinal.
+  A cardinal.
+  
+  Still.
 
-Still. Watching you.
+  Watching you.
 
-[[GADOOSH 📸-&gt;GADOOSH 1]]</tw-passagedata><tw-passagedata pid="3" name="GADOOSH 1" tags="" position="575,150" size="100,100">GADOOSH. 
-(click: &quot;GADOOSH&quot;)[
-(set: $flash to true)
-The world flashes white.
-]
-
-The shutter snaps.
-
-The world flashes white.
-
-...
-
-The branch is empty.
-
-It’s gone.
-
-Or...
-
-No.
-
-Not gone.
-
-Changed?
-
-[[Keep going-&gt;Level 2]]</tw-passagedata><tw-passagedata pid="4" name="Level 2" tags="" position="525,275" size="100,100">&lt;img src=&quot;peacock.jpg&quot; width=&quot;300&quot;&gt;
-Something feels different now.
-
-You keep thinking about the bird.
-
-About the way it looked at you.
-
-You try to shake it off.
-
-It was just a picture.
-
-...right?
-
-Then—
-
-another bird.
-
-Different.
-
-Watching.
-
-Waiting.
-
-[[Approach it-&gt;Bird 2 Scene]]</tw-passagedata><tw-passagedata pid="5" name="Bird 2 Scene" tags="" position="725,250" size="100,100">&lt;img src=&quot;bird2.jpg&quot; width=&quot;500&quot;&gt;
-
-This one feels... smarter.
-
-More aware.
-
-It tilts its head slightly.
-
-Like it&#39;s recognizing you.
-
-You raise the camera again.
-
-Why do you keep doing this?
-
-[[Take the picture-&gt;GADOOSH 2]]</tw-passagedata><tw-passagedata pid="6" name="GADOOSH 2" tags="" position="500,375" size="100,100">GADOOSH.
-(click: &quot;GADOOSH&quot;)[
-(set: $flash to true)
-The world flashes white.
-]
-The sound is louder this time.
-
-Sharper.
-
-The bird vanishes.
-
-You feel it now.
-
-This isn’t normal.
-
-They’re not just disappearing.
-
-They’re becoming something else.
-
-And somehow—
-
-you’re part of it.
-
-[[Continue-&gt;Level 3]]</tw-passagedata><tw-passagedata pid="7" name="Level 3" tags="" position="675,375" size="100,100">You try to keep going like everything is normal.
-
-Classes.
-Walking.
-Editing photos late at night.
-
-But your camera roll feels... haunted.
-
-Every bird you captured is gone.
-
-And every new one feels less like an animal.
-and more like a message.
-
-Soon, your small walks around Clemson turn into long drives,
-then early mornings,
-then hours spent chasing light over water.
-
-That’s where you see it.
-
-A bird cutting across the lake.
-
-Fast.
-Sharp.
-Beautiful.
-
-For the first time, you have to run to keep up.
-
-[[Follow it to the water-&gt;Lake Scene]]</tw-passagedata><tw-passagedata pid="8" name="Lake Scene" tags="" position="500,500" size="100,100">&lt;img src=&quot;lakebird.jpg&quot; width=&quot;500&quot;&gt;
-
-The wind moves across the water in soft ripples.
-
-The bird glides above it like it belongs to another world.
-
-You almost don’t want to touch the camera.
-
-Almost.
-
-It circles once.
-
-Then again.
-
-Like it’s giving you a chance.
-
-[[Lift the camera slowly-&gt;Lake Shot]]</tw-passagedata><tw-passagedata pid="9" name="Lake Shot" tags="" position="675,500" size="100,100">Your hands are steadier now.
-
-You know the feeling.
-The pause before the shutter.
-The tiny moment where everything holds still.
-
-The bird turns toward the light.
-
-This is the best shot you’ve ever had.
-
-[[Take the picture-&gt;GADOOSH 3]]</tw-passagedata><tw-passagedata pid="10" name="GADOOSH 3" tags="" position="500,625" size="100,100">GADOOSH.
-(click: &quot;GADOOSH&quot;)[
-(set: $flash to true)
-The world flashes white.
-]
-
-The sound cracks through the air.
-
-The water flashes silver.
-
-For one second, the bird is everywhere at once—
-
-in the sky,
-in the reflection,
-inside the lens,
-inside you.
-
-Then it’s gone.
-
-Not dead.
-
-Not alive.
-
-Transformed.
-
-And this time,
-you swear it left something behind.
-
-A feather drifts onto the shore.
-
-[[Pick up the feather-&gt;Feather Scene]]</tw-passagedata><tw-passagedata pid="11" name="Feather Scene" tags="" position="675,625" size="100,100">You pick it up carefully.
-
-It’s warm.
-
-That should be impossible.
-
-You turn it over in your hand,
-and suddenly your phone starts buzzing.
-
-One email.
-Then another.
-
-Someone saw your work.
-
-Then another.
-
-A local feature.
-A small photography page.
-A message asking if you’re available for travel.
-
-You stare at the feather in your hand.
-
-This is where it starts changing.
-
-Not just the birds.
-
-You.
-
-[[Open the email-&gt;Career Shift]]</tw-passagedata><tw-passagedata pid="12" name="Career Shift" tags="" position="500,725" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
-  &lt;img src=&quot;becky_camera.jpg&quot; width=&quot;300&quot; style=&quot;border-radius:20px;&quot;&gt;
+  [[Raise the camera-&gt;Cardinal Scene]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="Cardinal Scene" tags="" position="350,275" size="100,100">&lt;div class=&quot;viewfinder&quot;&gt;
+  &lt;div class=&quot;corner tl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner tr&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner bl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner br&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;focus-box&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-Your photos start spreading.
+&lt;div class=&quot;camera-hud&quot;&gt;REC • ISO 400 • 1/250 • f/2.8&lt;/div&gt;
+&lt;div class=&quot;scene-card bg-clemson&quot;&gt;
+  You raise the camera slowly.
 
-First around Clemson.
+  Not to scare it.
 
-Then farther.
+  The cardinal doesn’t move.
 
-People call your work emotional.
-Unreal.
-Spiritual.
-Wild.
+  It just watches you.
 
-They say your bird photography feels alive.
+  Your finger settles on the shutter.
 
-If only they knew.
+  Everything feels suspended.
 
-You upgrade your camera.
-You travel farther.
-You begin to understand that each bird is leading you somewhere.
+  Like the whole world is waiting for this one sound.
 
-And the birds are changing too.
-
-Getting rarer.
-Stranger.
-More powerful.
-
-Then one message changes everything.
-
-An all-expenses-paid trip.
-
-Destination:
-Alaska.
-
-Your assignment:
-photograph something unforgettable.
-
-[[Accept the trip-&gt;Alaska Intro]]</tw-passagedata><tw-passagedata pid="13" name="Alaska Intro" tags="" position="650,750" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
-  &lt;img src=&quot;alaska.jpg&quot; width=&quot;400&quot;&gt;
+  [[GADOOSH 📸-&gt;GADOOSH 1]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="GADOOSH 1" tags="" position="575,150" size="100,100">&lt;div class=&quot;viewfinder&quot;&gt;
+  &lt;div class=&quot;corner tl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner tr&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner bl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner br&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;focus-box&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-Switch to bird POV: 
+&lt;div class=&quot;camera-hud&quot;&gt;REC • ISO 400 • 1/320 • f/2.8&lt;/div&gt;
+&lt;div class=&quot;scene-card bg-clemson&quot;&gt;
+  GADOOSH.
 
-The air feels heavier now.
+  (run: flash())
 
-Her camera flashes again.
+  The shutter snaps.
 
-GADOOSH.(click: &quot;GADOOSH&quot;)[ (run: flash()) ]
+  White floods your vision.
 
-You are no longer the same bird.
+  ...
 
-You feel stronger. Faster. Seen.
+  When the world returns, the branch is empty.
 
-Becky lowers her camera… but this time, people are watching her.
+  The bird is gone.
 
-She’s not just a girl with a camera anymore.
+  Or maybe not gone.
 
-She’s becoming something bigger.
+  Changed.
 
-And somehow…
+  [[Keep going-&gt;Level 2]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="Level 2" tags="" position="525,275" size="100,100">&lt;div class=&quot;scene-card bg-peacock&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;peacock.jpg&quot;&gt;
+  &lt;/div&gt;
 
-so are you.
+  Something feels different now.
 
-[[Follow her journey-&gt;FameRise]]
-[[Fly away and resist the change-&gt;ResistPath]]</tw-passagedata><tw-passagedata pid="14" name="FameRise" tags="" position="600,875" size="100,100">The photos go viral.
+  You keep thinking about the bird.
 
-Your image is everywhere.
+  About the way it looked at you.
 
-But each time she captures you…
+  You try to shake it off.
 
-you feel your body slipping away.
+  It was just a picture.
 
-GADOOSH.
+  Right?
 
-You transform again.
+  Then another bird appears.
 
-This time...
+  Brighter.
 
-you are something rare.
+  Stranger.
 
-[[Become something extraordinary-&gt;RareBird]]</tw-passagedata><tw-passagedata pid="15" name="ResistPath" tags="" position="725,875" size="100,100">You fly away before the camera flashes.
+  Waiting.
 
-For a moment…
-
-you feel free.
-
-But no one sees you anymore.
-
-No one remembers you.
-
-Not even her.
-
-[[Fade into nothing-&gt;LoseEnding]]</tw-passagedata><tw-passagedata pid="16" name="RareBird" tags="" position="600,1000" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
-  &lt;img src=&quot;peacock.jpg&quot; width=&quot;300&quot;&gt;
+  [[Approach it-&gt;Bird 2 Scene]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="Bird 2 Scene" tags="" position="725,250" size="100,100">&lt;div class=&quot;viewfinder&quot;&gt;
+  &lt;div class=&quot;corner tl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner tr&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner bl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner br&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;focus-box&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-Your feathers explode with color.
+&lt;div class=&quot;camera-hud&quot;&gt;REC • ISO 320 • 1/160 • f/3.2&lt;/div&gt;
+&lt;div class=&quot;scene-card bg-peacock&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;bird2.jpg&quot;&gt;
+  &lt;/div&gt;
 
-You are no longer ordinary.
+  This one feels smarter.
 
-People travel to see you.
+  More aware.
 
-But Becky…
+  It tilts its head like it recognizes you.
 
-she’s chasing something more.
+  You lift the camera again.
 
-[[Travel with her-&gt;TravelArc]]</tw-passagedata><tw-passagedata pid="17" name="TravelArc" tags="" position="600,1125" size="100,100">A plane roars overhead.
+  You do not know why you keep doing this.
 
-Next thing you know—
+  But you do.
 
-you are somewhere cold.
-
-Alaska.
-
-You feel the wind slice through you.
-
-You are hunted. Admired. Photographed.
-
-GADOOSH.
-
-Again.
-
-[[Continue-&gt;FinalEvolution]]</tw-passagedata><tw-passagedata pid="18" name="FinalEvolution" tags="" position="250,725" size="100,100">You have become something unreal.
-
-Not just a bird.
-
-A symbol.
-
-But every flash takes something from you.
-
-One last photo.
-
-One final GADOOSH.
-
-[[Let her take it-&gt;WinEnding]]
-[[Fly before the flash-&gt;BittersweetEnding]]</tw-passagedata><tw-passagedata pid="19" name="LoseEnding" tags="" position="725,1000" size="100,100">You chose freedom.
-
-But at the cost of being seen.
-
-The world moves on.
-
-And you disappear with it.
-
-THE END.</tw-passagedata><tw-passagedata pid="20" name="WinEnding" tags="" position="200,850" size="100,100">The cold doesn’t hurt anymore.
-
-It feels like home.
-
-GADOOSH.
-(click: &quot;GADOOSH&quot;)[
-(set: $flash to true)
-The world flashes white.
-]
-
-But this time…
-
-you don’t disappear.
-
-You open your eyes.
-
-Ice. Ocean. Endless blue.
-
-You look down—
-
-flippers.
-
-You’re a penguin.
-
-Not hunted.
-
-Not rare.
-
-Just… free.
-
-[[Step toward the water-&gt;PenguinBeach]]</tw-passagedata><tw-passagedata pid="21" name="BittersweetEnding" tags="" position="325,850" size="100,100">You feel it coming
-
-the flash.
-
-GADOOSH.
-(click: &quot;GADOOSH&quot;)[
-(set: $flash to true)
-The world flashes white.
-]
-
-But this time…
-
-you move first.
-
-You fly.
-
-Faster than ever before.
-
-The light misses you.
-
-But something still changes.
-
-Something always does.
-
-[[Keep flying-&gt;Drift]]</tw-passagedata><tw-passagedata pid="22" name="PenguinBeach" tags="" position="200,975" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
-  &lt;img src=&quot;penguin_beach.jpg&quot; width=&quot;350&quot;&gt;
+  [[Take the picture-&gt;GADOOSH 2]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="6" name="GADOOSH 2" tags="" position="500,375" size="100,100">&lt;div class=&quot;viewfinder&quot;&gt;
+  &lt;div class=&quot;corner tl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner tr&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner bl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner br&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;focus-box&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-Waves crash softly against the shore.
+&lt;div class=&quot;camera-hud&quot;&gt;REC • ISO 320 • 1/200 • f/3.2&lt;/div&gt;
+&lt;div class=&quot;scene-card bg-peacock&quot;&gt;
+  GADOOSH.
 
-Other penguins slide across the ice, laughing in their own way.
+  (run: flash())
 
-No cameras.
+  The sound is sharper this time.
 
-No pressure.
+  The bird vanishes.
 
-Just rhythm.
+  You feel it now.
 
-You feel something new
+  This is not normal.
 
-not fear…
+  They are not disappearing.
 
-not transformation…
+  They are becoming something else.
 
-but choice.
+  And somehow, you are part of it.
 
-[[Follow the others-&gt;SurfScene]]
-[[Look back one last time-&gt;FinalLook]]</tw-passagedata><tw-passagedata pid="23" name="SurfScene" tags="" position="125,1100" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
-  &lt;img src=&quot;penguin_surf.jpg&quot; width=&quot;350&quot;&gt;
+  [[Continue-&gt;Level 3]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="7" name="Level 3" tags="" position="675,375" size="100,100">&lt;div class=&quot;scene-card bg-clemson&quot;&gt;
+  You try to keep going like everything is normal.
+
+  Classes.
+
+  Walking.
+
+  Editing photos late at night.
+
+  But your camera roll feels haunted.
+
+  Every bird you capture is gone.
+
+  Every new one feels less like an animal and more like a message.
+
+  Your small walks around Clemson turn into long drives, then early mornings, then whole days spent chasing light.
+
+  That is when you see it.
+
+  A bird cutting across the lake.
+
+  Fast.
+  Sharp.
+  Beautiful.
+
+  [[Follow it to the water-&gt;Lake Scene]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="Lake Scene" tags="" position="500,500" size="100,100">&lt;div class=&quot;scene-card bg-lake&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;lakebird.jpg&quot;&gt;
+  &lt;/div&gt;
+
+  The wind moves over the water in silver ripples.
+
+  The bird glides above it like it belongs to another world.
+
+  You almost do not want to touch the camera.
+
+  Almost.
+
+  It circles once.
+
+  Then again.
+
+  Like it is giving you permission.
+
+  [[Lift the camera slowly-&gt;Lake Shot]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="Lake Shot" tags="" position="675,500" size="100,100">&lt;div class=&quot;viewfinder&quot;&gt;
+  &lt;div class=&quot;corner tl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner tr&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner bl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner br&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;focus-box&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
-A wave builds.
+&lt;div class=&quot;camera-hud&quot;&gt;REC • ISO 250 • 1/500 • f/4.0&lt;/div&gt;
+&lt;div class=&quot;scene-card bg-lake&quot;&gt;
+  Your hands are steadier now.
 
-One penguin dives in
+  You know this feeling.
 
-then another.
+  The pause before the shutter.
 
-Something in you says go.
+  The tiny moment where everything holds still.
 
-You slide forward
+  The bird turns toward the light.
 
-and for the first time…
+  This is the best shot you have ever had.
 
-you aren’t running.
-
-You’re riding it.
-
-The water lifts you.
-
-The sky opens.
-
-You are not her subject anymore.
-
-You are your own story.
-
-THE END.</tw-passagedata><tw-passagedata pid="24" name="FinalLook" tags="" position="250,1100" size="100,100">Far in the distance
-
-a figure stands.
-
-Camera in hand.
-
-Becky.
-
-She raises it.
-
-For a moment…
-
-you think it will happen again.
-
-GADOOSH.
-
-But she lowers it.
-
-Smiles.
-
-And lets you go.
-
-[[Turn toward the ocean-&gt;SurfScene]]</tw-passagedata><tw-passagedata pid="25" name="Drift" tags="" position="325,975" size="100,100">The sky stretches endlessly.
-
-You don’t feel the same.
-
-Not cardinal.
-
-Not eagle.
-
-Not anything you recognize.
-
-Your wings feel heavier.
-
-The air feels colder.
-
-You descend.
-
-Slowly.
-
-[[Land-&gt;ColdShore]]</tw-passagedata><tw-passagedata pid="26" name="ColdShore" tags="" position="400,1100" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
-  &lt;img src=&quot;fog_ocean.jpg&quot; width=&quot;400&quot;&gt;
+  [[Take the picture-&gt;GADOOSH 3]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="GADOOSH 3" tags="" position="500,625" size="100,100">&lt;div class=&quot;viewfinder&quot;&gt;
+  &lt;div class=&quot;corner tl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner tr&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner bl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner br&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;focus-box&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;div class=&quot;camera-hud&quot;&gt;REC • ISO 250 • 1/640 • f/4.0&lt;/div&gt;
+&lt;div class=&quot;scene-card bg-lake&quot;&gt;
+  GADOOSH.
 
-Ocean.
+  (run: flash())
 
-Silence.
+  The sound cracks through the air.
 
-You look down.
+  The lake flashes silver.
 
-Flippers.
+  For one impossible second, the bird is in the sky, in the reflection, inside the lens, and somehow inside you.
 
-But they don’t feel like yours.
+  Then it is gone.
 
-Not really.
+  Not dead.
 
-Other penguins pass by.
+  Transformed.
 
-They belong here.
+  A feather drifts onto the shore.
 
-You don’t.
+  [[Pick up the feather-&gt;Feather Scene]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="11" name="Feather Scene" tags="" position="675,625" size="100,100">&lt;div class=&quot;scene-card bg-lake&quot;&gt;
+  You pick it up carefully.
 
-Not fully.
+  It is warm.
 
-Not anymore.
+  That should be impossible.
 
-Something in you remembers—
+  Your phone starts buzzing.
 
-trees.
+  One email.
 
-warm air.
+  Then another.
 
-flight.
+  Someone saw your work.
 
-A sound breaks the quiet.
+  A local feature.
 
-Footsteps.
+  A photography page.
 
-You turn.
+  A message asking if you are available for travel.
 
-Far in the distance—
+  You stare at the feather in your hand.
 
-a figure.
+  This is where everything starts changing.
 
-Still.
+  Not just the birds.
 
-Watching.
+  You.
 
-A camera lifts.
+  [[Open the email-&gt;Career Shift]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="Career Shift" tags="" position="500,725" size="100,100">&lt;div class=&quot;scene-card bg-camera&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;becky_camera.jpg&quot;&gt;
+  &lt;/div&gt;
 
-Your chest tightens.
+  Your photos start spreading.
 
-You know what comes next.
+  First around Clemson.
 
-You always do.
+  Then farther.
 
-&quot;ga...&quot;
+  People call your work emotional.
+  Unreal.
+  Spiritual.
+  Wild.
 
-[[Stay|FinalChoice]]
-[[Run|FinalChoice]]</tw-passagedata><tw-passagedata pid="27" name="FinalChoice" tags="" position="475,1225" size="100,100">Time slows.
+  They say your bird photography feels alive.
 
-The wind fades.
+  If only they knew.
 
-Everything narrows to one moment.
+  You upgrade your camera.
 
-Her finger rests on the shutter.
+  You travel farther.
 
-&quot;...doosh.&quot;
+  The birds grow rarer, stranger, more powerful.
 
-But it never comes.
+  Then one message changes everything.
 
-She hesitates.
+  An all-expenses-paid trip.
 
-Just for a second.
+  Destination: Alaska.
 
-Then...
+  [[Accept the trip-&gt;Alaska Intro]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="Alaska Intro" tags="" position="650,750" size="100,100">&lt;div class=&quot;viewfinder&quot;&gt;
+  &lt;div class=&quot;corner tl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner tr&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner bl&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;corner br&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;focus-box&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;camera-hud&quot;&gt;REC • ISO 500 • 1/800 • f/4.5&lt;/div&gt;
+&lt;div class=&quot;scene-card bg-alaska&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;alaska.jpg&quot;&gt;
+  &lt;/div&gt;
 
-she lowers the camera.
+  The air feels heavier now.
 
-No sound.
+  Her camera flashes again.
 
-No flash.
+  GADOOSH.
 
-No ending.
+  (run: flash())
 
-Just you.
+  You are no longer the same bird.
 
-And her.
+  Stronger.
+  Faster.
+  Seen.
 
-Looking.
+  Becky lowers the camera, but this time people are watching her too.
 
-You step back.
+  She is not just a girl with a camera anymore.
 
-Then turn.
+  She is becoming something bigger.
 
-And move.
+  And somehow, so are you.
 
-Not running.
+  [[Follow her journey-&gt;FameRise]]
+  [[Fly away and resist the change-&gt;ResistPath]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="FameRise" tags="" position="600,875" size="100,100">&lt;div class=&quot;scene-card bg-alaska&quot;&gt;
+  The photos go viral.
 
-Not afraid.
+  Your image is everywhere.
 
-Just... leaving.
+  But each time she captures you, you feel your body slipping into something new.
 
-For the first time
+  Another flash.
 
-you are not captured.
+  Another change.
 
-THE END</tw-passagedata></tw-storydata>
+  This time, you become something rare.
+
+  [[Become something extraordinary-&gt;RareBird]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="15" name="ResistPath" tags="" position="725,875" size="100,100">&lt;div class=&quot;scene-card bg-alaska&quot;&gt;
+  You fly before the shutter falls.
+
+  For one moment, you feel free.
+
+  But no one sees you anymore.
+
+  No one remembers you.
+
+  Not even her.
+
+  [[Fade into nothing-&gt;LoseEnding]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="RareBird" tags="" position="600,1000" size="100,100">&lt;div class=&quot;scene-card bg-peacock&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;peacock.jpg&quot;&gt;
+  &lt;/div&gt;
+
+  Your feathers erupt with color.
+
+  You are no longer ordinary.
+
+  People travel to see you.
+
+  But Becky is chasing something beyond beauty now.
+
+  [[Travel with her-&gt;TravelArc]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="TravelArc" tags="" position="600,1125" size="100,100">&lt;div class=&quot;scene-card bg-alaska&quot;&gt;
+  A plane roars overhead.
+
+  The next thing you know, you are somewhere colder.
+
+  Alaska stretches around you like a second sky.
+
+  The wind slices through you.
+
+  You are hunted.
+  Admired.
+  Photographed.
+
+  GADOOSH.
+
+  (run: flash())
+
+  [[Continue-&gt;FinalEvolution]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="18" name="FinalEvolution" tags="" position="250,725" size="100,100">&lt;div class=&quot;scene-card bg-alaska&quot;&gt;
+  You have become something unreal.
+
+  Not just a bird.
+
+  A symbol.
+
+  But every flash takes something from you.
+
+  One last photo.
+
+  One final GADOOSH.
+
+  [[Let her take it-&gt;WinEnding]]
+  [[Fly before the flash-&gt;BittersweetEnding]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="19" name="LoseEnding" tags="" position="725,1000" size="100,100">&lt;div class=&quot;scene-card bg-alaska&quot;&gt;
+  You chose freedom.
+
+  But at the cost of being seen.
+
+  The world moves on.
+
+  And you disappear with it.
+
+  THE END.
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="20" name="WinEnding" tags="" position="200,850" size="100,100">&lt;div class=&quot;scene-card bg-alaska&quot;&gt;
+  The cold does not hurt anymore.
+
+  It feels like home.
+
+  GADOOSH.
+
+  (run: flash())
+
+  But this time, you do not disappear.
+
+  You open your eyes.
+
+  Ice.
+  Ocean.
+  Endless blue.
+
+  You look down.
+
+  Flippers.
+
+  You are a penguin.
+
+  Not hunted.
+  Not rare.
+
+  Free.
+
+  [[Step toward the water-&gt;PenguinBeach]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="21" name="BittersweetEnding" tags="" position="325,850" size="100,100">&lt;div class=&quot;scene-card bg-alaska&quot;&gt;
+  You feel it coming.
+
+  The flash.
+
+  GADOOSH.
+
+  (run: flash())
+
+  But this time, you move first.
+
+  You fly faster than ever.
+
+  The light misses you.
+
+  But something still changes.
+
+  Something always does.
+
+  [[Keep flying-&gt;Drift]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="PenguinBeach" tags="" position="200,975" size="100,100">&lt;div class=&quot;scene-card bg-penguin-beach&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;penguin_beach.jpg&quot;&gt;
+  &lt;/div&gt;
+
+  Waves break softly against the shore.
+
+  Other penguins slide across the ice, laughing in their own way.
+
+  No cameras.
+
+  No pressure.
+
+  Just rhythm.
+
+  You feel something new.
+
+  Not fear.
+  Not transformation.
+
+  Choice.
+
+  [[Follow the others-&gt;SurfScene]]
+  [[Look back one last time-&gt;FinalLook]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="SurfScene" tags="" position="125,1100" size="100,100">&lt;div class=&quot;scene-card bg-penguin-surf&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;penguin_surf.jpg&quot;&gt;
+  &lt;/div&gt;
+
+  A wave rises.
+
+  One penguin dives in.
+
+  Then another.
+
+  Something in you says go.
+
+  You slide forward.
+
+  For the first time, you are not running.
+
+  You are riding it.
+
+  The water lifts you.
+
+  The sky opens.
+
+  You are not her subject anymore.
+
+  You are your own story.
+
+  THE END.
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="FinalLook" tags="" position="250,1100" size="100,100">&lt;div class=&quot;scene-card bg-penguin-beach&quot;&gt;
+  Far in the distance, a figure stands.
+
+  Camera in hand.
+
+  Becky.
+
+  She raises it.
+
+  For a moment, you think it will happen again.
+
+  But she lowers it.
+
+  Smiles.
+
+  And lets you go.
+
+  [[Turn toward the ocean-&gt;SurfScene]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="Drift" tags="" position="325,975" size="100,100">&lt;div class=&quot;scene-card bg-fog-ocean&quot;&gt;
+  The sky stretches endlessly.
+
+  You do not feel the same.
+
+  Not cardinal.
+  Not eagle.
+  Not anything you recognize.
+
+  Your wings feel heavier.
+
+  The air grows colder.
+
+  You descend.
+
+  Slowly.
+
+  [[Land-&gt;ColdShore]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="ColdShore" tags="" position="400,1100" size="100,100">&lt;div class=&quot;scene-card bg-fog-ocean&quot;&gt;
+  &lt;div class=&quot;center-image&quot;&gt;
+    &lt;img src=&quot;fog_ocean.jpg&quot;&gt;
+  &lt;/div&gt;
+
+  Ocean.
+
+  Silence.
+
+  You look down.
+
+  Flippers.
+
+  But they do not feel like yours.
+
+  Other penguins pass by.
+
+  They belong here.
+
+  You do not.
+
+  Something in you remembers trees, warm air, and flight.
+
+  Then you hear footsteps.
+
+  Far in the distance, a figure stands watching.
+
+  A camera begins to rise.
+
+  [[Stay-&gt;FinalChoice]]
+  [[Run-&gt;FinalChoice]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="27" name="FinalChoice" tags="" position="475,1225" size="100,100">&lt;div class=&quot;scene-card bg-fog-ocean&quot;&gt;
+  Time slows.
+
+  The wind fades.
+
+  Everything narrows to one moment.
+
+  Her finger rests on the shutter.
+
+ But it never comes.
+
+ She hesitates.
+
+ Then lowers the camera.
+
+ No sound.
+ No flash.
+ No ending.
+
+ Just you.
+
+ And her.
+
+ Looking.
+
+ You turn and move.
+  
+ Not running.
+ Not afraid.
+
+ Leaving.
+
+ For the first time, you are not captured.
+
+ THE END.
+&lt;/div&gt;</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
