@@ -38,7 +38,20 @@ tw-passagedata {
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity: 1;}
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.flash = function() {
+}tw-story {
+  background-image: url("cardinal.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0,0,0,0.4);
+  background-blend-mode: darken;
+  color: white;
+}
+
+tw-passage {
+  font-size: 1.2em;
+  line-height: 1.6;
+  }</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.flash = function() {
   let flash = document.createElement("div");
   flash.style.position = "fixed";
   flash.style.top = 0;
@@ -59,9 +72,14 @@ tw-passagedata {
   setTimeout(() => {
     flash.remove();
   }, 600);
-}</script><tw-passagedata pid="1" name="Start " tags="" position="375,125" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
-  &lt;img src=&quot;clemson_campus.jpg&quot; width=&quot;400&quot; style=&quot;border-radius:20px;&quot;&gt;
-&lt;/div&gt;
+}</script><tw-passagedata pid="1" name="Start" tags="" position="375,125" size="100,100">&lt;style&gt;
+tw-passage {
+  background-image: url(&quot;clemson_campus.png&quot;);
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+&lt;/style&gt;
 You’re standing in Clemson.
 
 The air is quiet. Too quiet.
@@ -76,27 +94,29 @@ A cardinal.
 
 Still. Watching you.
 
-(link: &quot;Raise the camera&quot;)[ 
-    (goto: &quot;Cardinal Scene&quot;)
-    
-]
-[[Start-&gt;Cardinal Scene]]</tw-passagedata><tw-passagedata pid="2" name="Cardinal Scene" tags="" position="375,275" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
-  &lt;img src=&quot;cardinal.jpg&quot; width=&quot;300&quot; style=&quot;border-radius:20px;&quot;&gt;
+[[Raise the camera-&gt;Cardinal Scene]]</tw-passagedata><tw-passagedata pid="2" name="Cardinal Scene" tags="" position="350,275" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
+  &lt;img src=&quot;clemson_campus.png&quot; width=&quot;400&quot; style=&quot;border-radius:20px;&quot;&gt;
 &lt;/div&gt;
-The bird doesn’t move.
 
-It should fly away… but it doesn’t.
+You’re standing in Clemson.
 
-It just watches you.
+The air is quiet. Too quiet.
 
-Like it knows.
+You didn’t come here for anything special… just practice.
 
-You lift the camera.
+Just photos.
 
-(link: &quot;Take the picture&quot;)[ 
-    (goto: &quot;GADOOSH 1&quot;)
+Then you see it.
+
+A cardinal.
+
+Still. Watching you.
+
+[[GADOOSH 📸-&gt;GADOOSH 1]]</tw-passagedata><tw-passagedata pid="3" name="GADOOSH 1" tags="" position="575,150" size="100,100">GADOOSH. 
+(click: &quot;GADOOSH&quot;)[
+(set: $flash to true)
+The world flashes white.
 ]
-[[Take the picture-&gt;GADOOSH 1]]</tw-passagedata><tw-passagedata pid="3" name="GADOOSH 1" tags="" position="575,150" size="100,100">GADOOSH. (click: &quot;GADOOSH&quot;)[ (run: flash()) ]
 
 The shutter snaps.
 
@@ -108,13 +128,13 @@ The branch is empty.
 
 It’s gone.
 
-Or—
+Or...
 
 No.
 
 Not gone.
 
-Changed.
+Changed?
 
 [[Keep going-&gt;Level 2]]</tw-passagedata><tw-passagedata pid="4" name="Level 2" tags="" position="525,275" size="100,100">&lt;img src=&quot;peacock.jpg&quot; width=&quot;300&quot;&gt;
 Something feels different now.
@@ -153,8 +173,11 @@ You raise the camera again.
 
 Why do you keep doing this?
 
-[[Take the picture-&gt;GADOOSH 2]]</tw-passagedata><tw-passagedata pid="6" name="GADOOSH 2" tags="" position="500,375" size="100,100">GADOOSH.(click: &quot;GADOOSH&quot;)[ (run: flash()) ]
-
+[[Take the picture-&gt;GADOOSH 2]]</tw-passagedata><tw-passagedata pid="6" name="GADOOSH 2" tags="" position="500,375" size="100,100">GADOOSH.
+(click: &quot;GADOOSH&quot;)[
+(set: $flash to true)
+The world flashes white.
+]
 The sound is louder this time.
 
 Sharper.
@@ -179,11 +202,11 @@ Classes.
 Walking.
 Editing photos late at night.
 
-But your camera roll feels haunted.
+But your camera roll feels... haunted.
 
 Every bird you captured is gone.
 
-And every new one feels less like an animal
+And every new one feels less like an animal.
 and more like a message.
 
 Soon, your small walks around Clemson turn into long drives,
@@ -226,7 +249,11 @@ The bird turns toward the light.
 
 This is the best shot you’ve ever had.
 
-[[Take the picture-&gt;GADOOSH 3]]&#39;&#39;Bold Text&#39;&#39;</tw-passagedata><tw-passagedata pid="10" name="GADOOSH 3" tags="" position="500,625" size="100,100">GADOOSH.(click: &quot;GADOOSH&quot;)[ (run: flash()) ]
+[[Take the picture-&gt;GADOOSH 3]]</tw-passagedata><tw-passagedata pid="10" name="GADOOSH 3" tags="" position="500,625" size="100,100">GADOOSH.
+(click: &quot;GADOOSH&quot;)[
+(set: $flash to true)
+The world flashes white.
+]
 
 The sound cracks through the air.
 
@@ -280,7 +307,10 @@ Not just the birds.
 
 You.
 
-[[Open the email-&gt;Career Shift]]</tw-passagedata><tw-passagedata pid="12" name="Career Shift" tags="" position="500,725" size="100,100">Your photos start spreading.
+[[Open the email-&gt;Career Shift]]</tw-passagedata><tw-passagedata pid="12" name="Career Shift" tags="" position="500,725" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
+  &lt;img src=&quot;becky_camera.jpg&quot; width=&quot;300&quot; style=&quot;border-radius:20px;&quot;&gt;
+&lt;/div&gt;
+Your photos start spreading.
 
 First around Clemson.
 
@@ -315,7 +345,12 @@ Alaska.
 Your assignment:
 photograph something unforgettable.
 
-[[Accept the trip-&gt;Alaska Intro]]</tw-passagedata><tw-passagedata pid="13" name="Alaska Intro" tags="" position="650,750" size="100,100">The air feels heavier now.
+[[Accept the trip-&gt;Alaska Intro]]</tw-passagedata><tw-passagedata pid="13" name="Alaska Intro" tags="" position="650,750" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
+  &lt;img src=&quot;alaska.jpg&quot; width=&quot;400&quot;&gt;
+&lt;/div&gt;
+Switch to bird POV: 
+
+The air feels heavier now.
 
 Her camera flashes again.
 
@@ -348,7 +383,7 @@ GADOOSH.
 
 You transform again.
 
-This time—
+This time...
 
 you are something rare.
 
@@ -364,7 +399,10 @@ No one remembers you.
 
 Not even her.
 
-[[Fade into nothing-&gt;LoseEnding]]</tw-passagedata><tw-passagedata pid="16" name="RareBird" tags="" position="600,1000" size="100,100">Your feathers explode with color.
+[[Fade into nothing-&gt;LoseEnding]]</tw-passagedata><tw-passagedata pid="16" name="RareBird" tags="" position="600,1000" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
+  &lt;img src=&quot;peacock.jpg&quot; width=&quot;300&quot;&gt;
+&lt;/div&gt;
+Your feathers explode with color.
 
 You are no longer ordinary.
 
@@ -411,12 +449,15 @@ The world moves on.
 
 And you disappear with it.
 
-THE END.</tw-passagedata><tw-passagedata pid="20" name="WinEnding" tags="" position="200,850" size="100,100">:: WinEnding
-The cold doesn’t hurt anymore.
+THE END.</tw-passagedata><tw-passagedata pid="20" name="WinEnding" tags="" position="200,850" size="100,100">The cold doesn’t hurt anymore.
 
 It feels like home.
 
-GADOOSH.(click: &quot;GADOOSH&quot;)[ (run: flash()) ]
+GADOOSH.
+(click: &quot;GADOOSH&quot;)[
+(set: $flash to true)
+The world flashes white.
+]
 
 But this time…
 
@@ -438,12 +479,15 @@ Not rare.
 
 Just… free.
 
-[[Step toward the water-&gt;PenguinBeach]]</tw-passagedata><tw-passagedata pid="21" name="BittersweetEnding" tags="" position="325,850" size="100,100">:: BittersweetEnding
-You feel it coming—
+[[Step toward the water-&gt;PenguinBeach]]</tw-passagedata><tw-passagedata pid="21" name="BittersweetEnding" tags="" position="325,850" size="100,100">You feel it coming
 
 the flash.
 
-GADOOSH.(click: &quot;GADOOSH&quot;)[ (run: flash()) ]
+GADOOSH.
+(click: &quot;GADOOSH&quot;)[
+(set: $flash to true)
+The world flashes white.
+]
 
 But this time…
 
@@ -459,7 +503,9 @@ But something still changes.
 
 Something always does.
 
-[[Keep flying-&gt;Drift]]</tw-passagedata><tw-passagedata pid="22" name="PenguinBeach" tags="" position="200,975" size="100,100">:: PenguinBeach
+[[Keep flying-&gt;Drift]]</tw-passagedata><tw-passagedata pid="22" name="PenguinBeach" tags="" position="200,975" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
+  &lt;img src=&quot;penguin_beach.jpg&quot; width=&quot;350&quot;&gt;
+&lt;/div&gt;
 Waves crash softly against the shore.
 
 Other penguins slide across the ice, laughing in their own way.
@@ -470,7 +516,7 @@ No pressure.
 
 Just rhythm.
 
-You feel something new—
+You feel something new
 
 not fear…
 
@@ -479,16 +525,18 @@ not transformation…
 but choice.
 
 [[Follow the others-&gt;SurfScene]]
-[[Look back one last time-&gt;FinalLook]]</tw-passagedata><tw-passagedata pid="23" name="SurfScene" tags="" position="125,1100" size="100,100">:: SurfScene
+[[Look back one last time-&gt;FinalLook]]</tw-passagedata><tw-passagedata pid="23" name="SurfScene" tags="" position="125,1100" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
+  &lt;img src=&quot;penguin_surf.jpg&quot; width=&quot;350&quot;&gt;
+&lt;/div&gt;
 A wave builds.
 
-One penguin dives in—
+One penguin dives in
 
 then another.
 
 Something in you says go.
 
-You slide forward—
+You slide forward
 
 and for the first time…
 
@@ -504,8 +552,7 @@ You are not her subject anymore.
 
 You are your own story.
 
-THE END.</tw-passagedata><tw-passagedata pid="24" name="FinalLook" tags="" position="250,1100" size="100,100">:: FinalLook
-Far in the distance—
+THE END.</tw-passagedata><tw-passagedata pid="24" name="FinalLook" tags="" position="250,1100" size="100,100">Far in the distance
 
 a figure stands.
 
@@ -527,8 +574,7 @@ Smiles.
 
 And lets you go.
 
-[[Turn toward the ocean-&gt;SurfScene]]</tw-passagedata><tw-passagedata pid="25" name="Drift" tags="" position="325,975" size="100,100">:: Drift
-The sky stretches endlessly.
+[[Turn toward the ocean-&gt;SurfScene]]</tw-passagedata><tw-passagedata pid="25" name="Drift" tags="" position="325,975" size="100,100">The sky stretches endlessly.
 
 You don’t feel the same.
 
@@ -546,18 +592,21 @@ You descend.
 
 Slowly.
 
-[[Land-&gt;ColdShore]]</tw-passagedata><tw-passagedata pid="26" name="ColdShore" tags="" position="450,1100" size="100,100">:: ColdShore
-Ice.
+[[Land-&gt;ColdShore]]</tw-passagedata><tw-passagedata pid="26" name="ColdShore" tags="" position="400,1100" size="100,100">&lt;div style=&quot;text-align:center;&quot;&gt;
+  &lt;img src=&quot;fog_ocean.jpg&quot; width=&quot;400&quot;&gt;
+&lt;/div&gt;
 
 Ocean.
 
 Silence.
 
-You look down—
+You look down.
 
-flippers…
+Flippers.
 
-but they don’t feel like yours.
+But they don’t feel like yours.
+
+Not really.
 
 Other penguins pass by.
 
@@ -569,42 +618,88 @@ Not fully.
 
 Not anymore.
 
-[[Watch the waves-&gt;FinalMoment]]</tw-passagedata><tw-passagedata pid="27" name="FinalMoment" tags="" position="450,1225" size="100,100">:: FinalMoment
-A wave rolls in.
+Something in you remembers—
 
-You step forward…
+trees.
 
-then stop.
+warm air.
 
-You don’t know if you’re meant to follow.
+flight.
 
-Behind you—
+A sound breaks the quiet.
 
-a faint click.
+Footsteps.
 
 You turn.
 
-Becky stands in the distance.
+Far in the distance—
 
-Camera lowered.
+a figure.
 
-She doesn’t take the photo.
+Still.
 
-She just watches.
+Watching.
 
-Like she’s trying to remember something she’s already losing.
+A camera lifts.
 
-You realize—
+Your chest tightens.
 
-you were never meant to stay.
+You know what comes next.
 
-But you were never meant to disappear either.
+You always do.
 
-The wave crashes.
+&quot;ga...&quot;
 
-You close your eyes.
+[[Stay|FinalChoice]]
+[[Run|FinalChoice]]</tw-passagedata><tw-passagedata pid="27" name="FinalChoice" tags="" position="475,1225" size="100,100">Time slows.
 
-THE END.</tw-passagedata><tw-passagedata pid="28" name="Untitled Passage" tags="" position="575,1275" size="100,100"></tw-passagedata><tw-passagedata pid="29" name="Untitled Passage 1" tags="" position="450,1400" size="100,100"></tw-passagedata></tw-storydata>
+The wind fades.
+
+Everything narrows to one moment.
+
+Her finger rests on the shutter.
+
+&quot;...doosh.&quot;
+
+But it never comes.
+
+She hesitates.
+
+Just for a second.
+
+Then...
+
+she lowers the camera.
+
+No sound.
+
+No flash.
+
+No ending.
+
+Just you.
+
+And her.
+
+Looking.
+
+You step back.
+
+Then turn.
+
+And move.
+
+Not running.
+
+Not afraid.
+
+Just... leaving.
+
+For the first time
+
+you are not captured.
+
+THE END</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
